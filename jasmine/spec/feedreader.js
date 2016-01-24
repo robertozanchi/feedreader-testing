@@ -42,9 +42,9 @@ $(function() {
          * and that the name is not empty.
          */
         it('all have valid names', function() {
-            allFeeds.forEach(function(element) {
-                expect(element.name).toBeDefined();
-                expect(element.name.length).not.toBe(0);
+            allFeeds.forEach(function(feed) {
+                expect(feed.name).toBeDefined();
+                expect(feed.name.length).not.toBe(0);
             });
         });
     });
@@ -98,20 +98,20 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        var feedContent0;
-        var feedContent1;
+        var feedBefore;
+        var feedAfter;
         beforeEach(function(done) {
             loadFeed(0, function() {
-                feedContent0 = $('.feed').html();
+                feedBefore = $('.feed').html();
                 loadFeed(1, function() {
-                    feedContent1 = $('.feed').html();
+                    feedAfter = $('.feed').html();
                     done();
                 });
             });
         });
 
-        it('ensures that content changes', function() {
-            expect(feedContent1).not.toEqual(feedContent0);
+        it('ensures that feed content changes', function() {
+            expect(feedAfter).not.toEqual(feedBefore);
         });
     });
 
